@@ -1,4 +1,8 @@
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2867a5c (Update wire connection visuals)
 import React, { useState, useEffect } from 'react';
 import { authService } from '../services/authService';
 import { srsSystem } from '../services/srsSystem';
@@ -46,7 +50,11 @@ const UserProfileView: React.FC<Props> = ({ onBack, onLogout, onReviewTopic }) =
              </div>
 
              <div className="flex border-b border-slate-800 mb-6 gap-6 overflow-x-auto">
+<<<<<<< HEAD
                  {['overview', 'learning', 'tests', 'community'].map(tab => (
+=======
+                 {['overview', 'learning', 'tests'].map(tab => (
+>>>>>>> 2867a5c (Update wire connection visuals)
                      <button key={tab} onClick={() => setActiveTab(tab)} className={`pb-2 uppercase text-sm font-bold whitespace-nowrap ${activeTab === tab ? 'text-primary-500 border-b-2 border-primary-500' : 'text-slate-500'}`}>
                         {tab === 'learning' ? 'My Learning' : tab}
                      </button>

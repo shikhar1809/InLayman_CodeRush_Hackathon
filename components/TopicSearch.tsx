@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Sparkles, BookOpen, ArrowRight, CheckCircle2, UploadCloud, Lightbulb, Code, Target, BrainCircuit, Flame, AlertTriangle, Loader2, FileText, Image as ImageIcon, Youtube, XCircle, Brain, RefreshCw } from 'lucide-react';
+=======
+import React, { useState, useEffect, useRef } from 'react';
+import { Search, Sparkles, BookOpen, ArrowRight, CheckCircle2, UploadCloud, Lightbulb, Code, Target, BrainCircuit, Flame, AlertTriangle, Loader2, FileText, Image as ImageIcon, Youtube, XCircle, RefreshCw, Beaker, Brain } from 'lucide-react';
+>>>>>>> 2867a5c (Update wire connection visuals)
 import { motion as motionBase, AnimatePresence } from 'framer-motion';
 import ChaosReductionBackground from './ChaosReductionBackground';
 import { classifyIntent, analyzeImageInput } from '../services/gemini';
@@ -19,7 +24,10 @@ interface TopicSearchProps {
   onFileAnalyze: (fileBase64: string, mimeType: string) => void;
   onVoiceStart: () => void;
   onTestStart: (topic: string) => void;
+<<<<<<< HEAD
   onOpenCommunity: () => void;
+=======
+>>>>>>> 2867a5c (Update wire connection visuals)
   onPracticeStart: (topic: string) => void;
   onScenarioStart: (topic: string) => void;
   onCodeStart: () => void;
@@ -31,9 +39,15 @@ interface TopicSearchProps {
   isAnalyzingDocument?: boolean; 
 }
 
+<<<<<<< HEAD
 type SearchMode = 'LEARN' | 'TEST' | 'PRACTICE' | 'APPLY' | 'CODE';
 
 const TopicSearch: React.FC<TopicSearchProps> = ({ onSearch, onFileAnalyze, onVoiceStart, onTestStart, onOpenCommunity, onPracticeStart, onScenarioStart, onCodeStart, onOpenGraph, onVideoStart, onOpenNotebook, lastActiveTopic, onGoalTaskStart, isAnalyzingDocument = false }) => {
+=======
+type SearchMode = 'LEARN' | 'PRACTICE' | 'APPLY' | 'TEST' | 'CODE';
+
+const TopicSearch: React.FC<TopicSearchProps> = ({ onSearch, onFileAnalyze, onVoiceStart, onTestStart, onPracticeStart, onScenarioStart, onCodeStart, onOpenGraph, onVideoStart, onOpenNotebook, lastActiveTopic, onGoalTaskStart, isAnalyzingDocument = false }) => {
+>>>>>>> 2867a5c (Update wire connection visuals)
   const [input, setInput] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -82,12 +96,18 @@ const TopicSearch: React.FC<TopicSearchProps> = ({ onSearch, onFileAnalyze, onVo
           }
 
           // INTELLIGENT MODE SWITCHING LOGIC
+<<<<<<< HEAD
           if (intent === 'CODE' && mode !== 'CODE') {
                setMode('CODE');
                setAutoSwitchMessage("Switching to Code Mode");
           } else if (intent === 'TEST' && mode !== 'TEST') {
                setMode('TEST');
                setAutoSwitchMessage("Switching to Quiz Mode");
+=======
+          if (intent === 'CODE') {
+               setDetectedIntent('Code Analysis');
+               setAutoSwitchMessage("Code Detected - Ready to Run");
+>>>>>>> 2867a5c (Update wire connection visuals)
           } else if (intent === 'PRACTICE' && mode !== 'PRACTICE') {
                setMode('PRACTICE');
                setAutoSwitchMessage("Switching to Practice Mode");
@@ -217,6 +237,100 @@ const TopicSearch: React.FC<TopicSearchProps> = ({ onSearch, onFileAnalyze, onVo
       reader.readAsDataURL(file);
   }
 
+<<<<<<< HEAD
+=======
+  // --- NEON WIRE CALCULATIONS ---
+  const getWirePath = () => {
+      // Use brighter Teal-400 (#2dd4bf) for Practice to match the neon intensity of others
+      const color = mode === 'LEARN' ? '#22d3ee' : mode === 'PRACTICE' ? '#2dd4bf' : '#3b82f6';
+      
+      const startX = mode === 'LEARN' ? 400 : mode === 'PRACTICE' ? 500 : 600;
+      
+      // Card Centers (Grid Cols 3)
+      let targetX = 500;
+      if (mode === 'LEARN') targetX = 167;
+      else if (mode === 'PRACTICE') targetX = 500;
+      else targetX = 833;
+
+      const startY = 10;
+      const endY = 130; 
+
+      const cp1y = startY + 60;
+      const cp2y = endY - 60;
+
+      // Add a curve offset for the straight line (Practice) so it looks like a loose wire 
+      // and isn't hidden behind the card center.
+      // We'll curve it to the right slightly (+60px).
+      const curveOffset = startX === targetX ? 60 : 0; 
+      
+      const cp1x = startX + curveOffset;
+      const cp2x = targetX + curveOffset;
+
+      const dPath = `M ${startX} ${startY} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${targetX} ${endY}`;
+
+      return (
+          <svg className="absolute top-0 left-0 w-full h-full pointer-events-none z-10" viewBox="0 0 1000 150" preserveAspectRatio="none">
+             <defs>
+                 <filter id="wire-glow" x="-50%" y="-50%" width="200%" height="200%">
+                     <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                     <feMerge>
+                         <feMergeNode in="coloredBlur"/>
+                         <feMergeNode in="SourceGraphic"/>
+                     </feMerge>
+                 </filter>
+             </defs>
+             
+             {/* Wire Shadow */}
+             <path d={dPath} fill="none" stroke="#020617" strokeWidth="8" strokeLinecap="round" />
+             
+             {/* Main Wire */}
+             <path d={dPath} fill="none" stroke="#334155" strokeWidth="4" strokeLinecap="round" />
+
+             {/* Energy Pulse */}
+             <path d={dPath} fill="none" stroke={color} strokeWidth="2" strokeDasharray="10 10" filter="url(#wire-glow)">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="0.8s" repeatCount="indefinite" />
+             </path>
+
+             {/* Plug Head */}
+             <g transform={`translate(${targetX}, ${endY})`}>
+                 <rect x="-16" y="-24" width="32" height="24" rx="4" fill="#1e293b" stroke={color} strokeWidth="2" filter="url(#wire-glow)" />
+                 <circle cx="0" cy="-12" r="4" fill={color}>
+                    <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite" />
+                 </circle>
+                 {/* Pins */}
+                 <rect x="-10" y="0" width="6" height="8" fill="#94a3b8" />
+                 <rect x="4" y="0" width="6" height="8" fill="#94a3b8" />
+             </g>
+          </svg>
+      );
+  }
+
+  // Helper for Card Styling
+  const getCardStyle = (cardMode: SearchMode) => {
+      const isActive = mode === cardMode;
+      let baseStyle = "p-6 bg-slate-900 border rounded-2xl flex flex-col items-center justify-center gap-4 group transition-all relative overflow-hidden h-full z-20 ";
+      
+      if (isActive) {
+          if (cardMode === 'LEARN') baseStyle += "border-cyan-400 shadow-[0_0_30px_rgba(34,211,238,0.3)] bg-slate-900";
+          else if (cardMode === 'PRACTICE') baseStyle += "border-teal-400 shadow-[0_0_30px_rgba(45,212,191,0.3)] bg-slate-900";
+          else if (cardMode === 'APPLY') baseStyle += "border-blue-400 shadow-[0_0_30px_rgba(96,165,250,0.3)] bg-slate-900";
+      } else {
+          baseStyle += "border-slate-800 hover:border-slate-700 opacity-50 hover:opacity-80 scale-95";
+      }
+      return baseStyle;
+  }
+
+  const getSocketStyle = (cardMode: SearchMode) => {
+      const isActive = mode === cardMode;
+      return (
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3 bg-slate-800 rounded-b-lg border-b border-x border-slate-700 z-30 flex justify-center gap-2 pt-1">
+             <div className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-white shadow-[0_0_5px_#fff]' : 'bg-slate-950'}`}></div>
+             <div className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-white shadow-[0_0_5px_#fff]' : 'bg-slate-950'}`}></div>
+          </div>
+      );
+  }
+
+>>>>>>> 2867a5c (Update wire connection visuals)
   return (
     <div className="relative bg-slate-950 w-full selection:bg-primary-500/30 overflow-x-hidden">
       <div className="fixed inset-0 pointer-events-none z-0">
@@ -226,6 +340,10 @@ const TopicSearch: React.FC<TopicSearchProps> = ({ onSearch, onFileAnalyze, onVo
       </div>
 
       <div className="relative z-20 min-h-screen flex flex-col items-center w-full max-w-6xl px-4 md:px-6 text-center mx-auto py-12">
+<<<<<<< HEAD
+=======
+        {/* Top Header Stats */}
+>>>>>>> 2867a5c (Update wire connection visuals)
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 h-[140px]">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-slate-900/80 backdrop-blur-md border border-slate-800 rounded-2xl p-4 flex items-center justify-between shadow-lg h-full">
                 <div className="text-left">
@@ -263,7 +381,13 @@ const TopicSearch: React.FC<TopicSearchProps> = ({ onSearch, onFileAnalyze, onVo
             Complex Ideas.<br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 via-cyan-300 to-primary-500">Simply Understood.</span>
         </motion.h1>
 
+<<<<<<< HEAD
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="w-full max-w-2xl space-y-6">
+=======
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="w-full max-w-2xl space-y-6 relative mb-12">
+            
+            {/* Search / Upload Zone */}
+>>>>>>> 2867a5c (Update wire connection visuals)
             <div className="relative z-30 min-h-[80px]" onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}>
                 <AnimatePresence mode="wait">
                     {isAnalyzingDocument ? (
@@ -282,7 +406,11 @@ const TopicSearch: React.FC<TopicSearchProps> = ({ onSearch, onFileAnalyze, onVo
                              <div className="flex items-center gap-3 text-white font-bold text-lg"><UploadCloud className="w-8 h-8 text-primary-200 animate-bounce" /><span>Drop File to Simplify</span></div>
                          </motion.div>
                     ) : (
+<<<<<<< HEAD
                         <motion.form key="search" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1, x: shake ? [0, -10, 10, -10, 10, 0] : 0 }} exit={{ opacity: 0, scale: 0.95 }} onSubmit={handleSubmit} className="relative group">
+=======
+                        <motion.form key="search" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1, x: shake ? [0, -10, 10, -10, 10, 0] : 0 }} exit={{ opacity: 0, scale: 0.95 }} onSubmit={handleSubmit} className="relative group z-30">
+>>>>>>> 2867a5c (Update wire connection visuals)
                             <motion.div animate={{ boxShadow: isFocused ? "0 0 50px -10px rgba(6, 182, 212, 0.25)" : "0 0 0px 0px rgba(0,0,0,0)", borderColor: isInvalidIntent ? "rgba(239, 68, 68, 0.6)" : isFocused ? "rgba(6, 182, 212, 0.5)" : "rgba(30, 41, 59, 1)", scale: isFocused ? 1.02 : 1 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className={`relative flex items-center bg-slate-900/90 backdrop-blur-xl rounded-2xl border transition-colors duration-300 overflow-hidden ${isInvalidIntent ? 'border-red-500/50' : isFocused ? 'border-primary-500/50' : 'border-slate-800'}`}>
                                 <div className={`absolute inset-0 bg-gradient-to-r pointer-events-none transition-opacity duration-500 ${isInvalidIntent ? 'from-red-500/20 via-orange-500/10' : 'from-primary-500/20 via-cyan-500/10 to-primary-500/5'} ${isFocused || isInvalidIntent ? 'opacity-100' : 'opacity-0'}`}></div>
                                 <div className="pl-6 transition-colors duration-300 relative z-10">
@@ -315,15 +443,31 @@ const TopicSearch: React.FC<TopicSearchProps> = ({ onSearch, onFileAnalyze, onVo
                     )}
                 </AnimatePresence>
             </div>
+<<<<<<< HEAD
             <div className="flex justify-center relative z-20">
                  <div className="bg-slate-900/80 p-1.5 rounded-xl border border-slate-800 flex gap-1 relative shadow-lg backdrop-blur-md">
                     <motion.div className="absolute top-1.5 bottom-1.5 bg-primary-600 rounded-lg shadow-md z-0" initial={false as any} animate={{ left: mode === 'LEARN' ? '6px' : mode === 'TEST' ? 'calc(20% + 4px)' : mode === 'PRACTICE' ? 'calc(40% + 2px)' : mode === 'APPLY' ? 'calc(60%)' : 'calc(80% - 2px)', width: 'calc(20% - 4px)' }} transition={{ type: "spring", stiffness: 300, damping: 30 }} />
                     {['LEARN', 'TEST', 'PRACTICE', 'APPLY', 'CODE'].map((m) => (
                         <button key={m} onClick={() => setMode(m as SearchMode)} className={`px-2 md:px-4 py-2 rounded-lg text-[10px] md:text-xs font-bold transition-all relative z-10 w-1/5 ${mode === m ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}>{m}</button>
+=======
+            
+            {/* TABS CONTAINER */}
+            <div className="flex justify-center relative z-20">
+                 <div className="bg-slate-900/80 p-1.5 rounded-xl border border-slate-800 flex gap-1 relative shadow-lg backdrop-blur-md">
+                    <motion.div className="absolute top-1.5 bottom-1.5 bg-primary-600 rounded-lg shadow-md z-0" initial={false as any} 
+                    animate={{ 
+                        left: mode === 'LEARN' ? '6px' : mode === 'PRACTICE' ? 'calc(33.33% + 4px)' : mode === 'APPLY' ? 'calc(66.66% + 2px)' : '6px', 
+                        width: 'calc(33.33% - 6px)' 
+                    }} 
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }} />
+                    {['LEARN', 'PRACTICE', 'APPLY'].map((m) => (
+                        <button key={m} onClick={() => setMode(m as SearchMode)} className={`px-2 md:px-4 py-2 rounded-lg text-[10px] md:text-xs font-bold transition-all relative z-10 w-1/3 ${mode === m ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}>{m}</button>
+>>>>>>> 2867a5c (Update wire connection visuals)
                     ))}
                  </div>
             </div>
 
+<<<<<<< HEAD
             <div className="mt-8 relative z-20 max-w-5xl mx-auto w-full">
                  <div className="flex flex-col gap-6">
                      <div>
@@ -346,6 +490,72 @@ const TopicSearch: React.FC<TopicSearchProps> = ({ onSearch, onFileAnalyze, onVo
                                  <span className="text-sm font-bold text-slate-300 group-hover:text-white">Code DNA</span>
                              </motion.button>
                          </div>
+=======
+            {/* WIRE & CARDS CONTAINER */}
+            <div className="relative w-full max-w-5xl mx-auto mt-4">
+                 {/* 1. WIRE LAYER */}
+                 <div className="absolute top-[-60px] left-0 right-0 h-[160px] z-10 pointer-events-none">
+                     {getWirePath()}
+                 </div>
+
+                 {/* 2. CARDS LAYER */}
+                 <div className="grid grid-cols-3 gap-6 pt-10">
+                     {/* Card 1: LEARN -> AI Tutor */}
+                     <div className="relative h-40">
+                         {getSocketStyle('LEARN')}
+                         <motion.button 
+                            whileHover={{ scale: 1.02 }} 
+                            whileTap={{ scale: 0.95 }} 
+                            onClick={onVoiceStart} 
+                            className={getCardStyle('LEARN')}
+                         >
+                             <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
+                                 <Sparkles className={`w-6 h-6 ${mode === 'LEARN' ? 'text-cyan-400' : 'text-slate-400'}`} />
+                             </div>
+                             <div>
+                                 <div className={`text-sm font-bold ${mode === 'LEARN' ? 'text-cyan-400' : 'text-slate-300'}`}>AI Tutor</div>
+                                 <div className="text-[10px] text-slate-500 font-medium mt-1">Interactive Voice Mode</div>
+                             </div>
+                         </motion.button>
+                     </div>
+
+                     {/* Card 2: PRACTICE -> Smart Note */}
+                     <div className="relative h-40">
+                         {getSocketStyle('PRACTICE')}
+                         <motion.button 
+                            whileHover={{ scale: 1.02 }} 
+                            whileTap={{ scale: 0.95 }} 
+                            onClick={onOpenNotebook} 
+                            className={getCardStyle('PRACTICE')}
+                         >
+                             <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
+                                 <BookOpen className={`w-6 h-6 ${mode === 'PRACTICE' ? 'text-teal-400' : 'text-slate-400'}`} />
+                             </div>
+                             <div>
+                                 <div className={`text-sm font-bold ${mode === 'PRACTICE' ? 'text-teal-400' : 'text-slate-300'}`}>Smart Note</div>
+                                 <div className="text-[10px] text-slate-500 font-medium mt-1">Context-Aware Notebook</div>
+                             </div>
+                         </motion.button>
+                     </div>
+
+                     {/* Card 3: APPLY -> The Lab */}
+                     <div className="relative h-40">
+                         {getSocketStyle('APPLY')}
+                         <motion.button 
+                            whileHover={{ scale: 1.02 }} 
+                            whileTap={{ scale: 0.95 }} 
+                            onClick={onCodeStart} 
+                            className={getCardStyle('APPLY')}
+                         >
+                             <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700">
+                                 <Beaker className={`w-6 h-6 ${mode === 'APPLY' ? 'text-blue-400' : 'text-slate-400'}`} />
+                             </div>
+                             <div>
+                                 <div className={`text-sm font-bold ${mode === 'APPLY' ? 'text-blue-400' : 'text-slate-300'}`}>The Lab</div>
+                                 <div className="text-[10px] text-slate-500 font-medium mt-1">Simulate Real World</div>
+                             </div>
+                         </motion.button>
+>>>>>>> 2867a5c (Update wire connection visuals)
                      </div>
                  </div>
             </div>

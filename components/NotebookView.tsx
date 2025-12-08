@@ -1,12 +1,24 @@
+<<<<<<< HEAD
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Binder, Note, NoteHighlight, Checkpoint, NoteReference, UserGoal } from '../types';
 import { Plus, ArrowLeft, Sparkles, Zap, Bot, ToggleLeft, ToggleRight, Loader2, Replace, Target, CheckSquare, Link, Video, BoxSelect, MousePointer2, Type, Pen, Highlighter, Check, XCircle, Cloud, Save, Layers, GraduationCap, Copy, RefreshCw } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+=======
+import React, { useState, useEffect, useRef } from 'react';
+import { Binder, Note, NoteHighlight, Checkpoint, NoteReference, UserGoal } from '../types';
+import { Plus, ArrowLeft, Sparkles, Zap, Bot, ToggleLeft, ToggleRight, Loader2, Replace, Target, CheckSquare, Link, Video, BoxSelect, MousePointer2, Type, Pen, Highlighter, Check, XCircle, Cloud, Save, Layers, GraduationCap, Copy, RefreshCw } from 'lucide-react';
+import { motion as motionBase, AnimatePresence } from 'framer-motion';
+>>>>>>> 2867a5c (Update wire connection visuals)
 import { enhanceNoteContent, generateNoteVisual, suggestSimilarQuestion, analyzeNoteContext, analyzeVisualSelection, monitorNoteSession, generateNoteFromResource } from '../services/gemini';
 import { authService } from '../services/authService';
 import LiveTutor from './LiveTutor';
 
+<<<<<<< HEAD
+=======
+const motion = motionBase as any;
+
+>>>>>>> 2867a5c (Update wire connection visuals)
 interface Props {
     onBack: () => void;
     initialBinderId?: string;
@@ -970,4 +982,8 @@ const NotebookView: React.FC<Props> = ({ onBack, initialBinderId, initialNoteId 
     );
 };
 
+<<<<<<< HEAD
 export default NotebookView;
+=======
+export default NotebookView;
+>>>>>>> 2867a5c (Update wire connection visuals)

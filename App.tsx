@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2867a5c (Update wire connection visuals)
 // ... (imports)
 import React, { useState, useEffect, useRef } from 'react';
 import { AppView, LearningPath, DocumentAnalysis, UserProfile, CapstoneProject, PodcastData, NextSteps, DayPlan, Binder, Note, NoteHighlight } from './types';
@@ -9,7 +13,10 @@ import DocumentAnalyzer from './components/DocumentAnalyzer';
 import LiveTutor from './components/LiveTutor';
 import TestModule from './components/TestModule'; 
 import ReviewDashboard from './components/ReviewDashboard'; 
+<<<<<<< HEAD
 import AnalogyCommunity from './components/AnalogyCommunity';
+=======
+>>>>>>> 2867a5c (Update wire connection visuals)
 import UserProfileView from './components/UserProfile';
 import CodeAnalogy from './components/CodeAnalogy';
 import PracticeMode from './components/PracticeMode';
@@ -306,7 +313,10 @@ const App: React.FC = () => {
                 onFileAnalyze={handleFileAnalyze}
                 onVoiceStart={() => setShowVoiceModal(true)}
                 onTestStart={handleTestStart}
+<<<<<<< HEAD
                 onOpenCommunity={() => setView(AppView.COMMUNITY)}
+=======
+>>>>>>> 2867a5c (Update wire connection visuals)
                 onPracticeStart={handlePracticeStart}
                 onScenarioStart={handleScenarioStart}
                 onCodeStart={() => setView(AppView.CODE)}
@@ -323,7 +333,10 @@ const App: React.FC = () => {
       case AppView.DOCUMENT: return <div className="h-screen flex items-center justify-center"><Loader2 className="w-10 h-10 animate-spin text-primary-500"/></div>; // Temp state while redirecting
       // REVIEW: Handle Initial Topic for direct review
       case AppView.REVIEW: return <ReviewDashboard onBack={() => setView(AppView.HOME)} initialTopic={topic !== '' ? topic : undefined} />;
+<<<<<<< HEAD
       case AppView.COMMUNITY: return <AnalogyCommunity onBack={() => setView(AppView.HOME)} />;
+=======
+>>>>>>> 2867a5c (Update wire connection visuals)
       // PROFILE: Pass review handler
       case AppView.PROFILE: return <UserProfileView onBack={() => setView(AppView.HOME)} onLogout={handleLogout} onReviewTopic={(t) => { setTopic(t); setView(AppView.REVIEW); }} />;
       case AppView.PRACTICE: return <PracticeMode topic={topic} onBack={() => { completeGoalTaskIfActive(); setView(AppView.HOME); }} />;
@@ -477,4 +490,8 @@ const App: React.FC = () => {
   );
 };
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+>>>>>>> 2867a5c (Update wire connection visuals)

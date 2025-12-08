@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2867a5c (Update wire connection visuals)
 import React, { useState } from 'react';
 import { analyzeVideo } from '../services/gemini';
 import { VideoAnalysisResult } from '../types';
 import { Youtube, Upload, Clock, Loader2, PlayCircle, ArrowLeft, Layers, FileText } from 'lucide-react';
+<<<<<<< HEAD
 import { motion } from 'framer-motion';
+=======
+import { motion as motionBase } from 'framer-motion';
+
+const motion = motionBase as any;
+>>>>>>> 2867a5c (Update wire connection visuals)
 
 interface Props {
     initialUrl?: string;
@@ -170,4 +179,8 @@ const VideoAnalyzer: React.FC<Props> = ({ initialUrl = '', onBack }) => {
     );
 };
 
+<<<<<<< HEAD
 export default VideoAnalyzer;
+=======
+export default VideoAnalyzer;
+>>>>>>> 2867a5c (Update wire connection visuals)

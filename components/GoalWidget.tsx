@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Target, ArrowRight, Play, Loader2, Calendar, CheckCircle2, RefreshCw } from 'lucide-react';
+<<<<<<< HEAD
 import { motion } from 'framer-motion';
+=======
+import { motion as motionBase } from 'framer-motion';
+>>>>>>> 2867a5c (Update wire connection visuals)
 import { generateGoalCurriculum } from '../services/gemini';
 import { authService } from '../services/authService';
 import { UserGoal, DayPlan } from '../types';
 
+<<<<<<< HEAD
+=======
+const motion = motionBase as any;
+
+>>>>>>> 2867a5c (Update wire connection visuals)
 interface Props {
     onTaskStart: (task: DayPlan) => void;
 }

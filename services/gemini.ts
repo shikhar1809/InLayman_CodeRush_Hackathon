@@ -1,7 +1,11 @@
 
 
 import { GoogleGenAI, Type, Modality } from "@google/genai";
+<<<<<<< HEAD
 import { Question, LearningPath, AnalogyContent, LiveConfig, DocumentAnalysis, TestResult, ComplexityLevel, CodeAnalysis, PracticeState, ScenarioState, CheatSheetData, CapstoneProject, PodcastData, VideoAnalysisResult, NextSteps, DayPlan, PrerequisiteNode, Flashcard, Checkpoint, NoteReference, CodeDeepAnalysis, CodeReconstructionResult, ScenarioLevel } from '../types';
+=======
+import { Question, LearningPath, AnalogyContent, LiveConfig, DocumentAnalysis, TestResult, ComplexityLevel, CodeAnalysis, PracticeState, ScenarioState, CheatSheetData, CapstoneProject, PodcastData, VideoAnalysisResult, NextSteps, DayPlan, PrerequisiteNode, Flashcard, Checkpoint, NoteReference, CodeDeepAnalysis, CodeReconstructionResult, ScenarioLevel, LabMission, LabRole, LabFeedback } from '../types';
+>>>>>>> 2867a5c (Update wire connection visuals)
 
 // Global instance 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
@@ -445,6 +449,63 @@ export const evaluateCodeReconstruction = async (originalCode: string, userCode:
     return JSON.parse(response.text || '{}');
 }
 
+<<<<<<< HEAD
+=======
+// --- NEW LAB SIMULATION MODULE ---
+
+export const generateLabMission = async (topic: string, role: LabRole): Promise<LabMission> => {
+    const response = await ai.models.generateContent({
+        model: REASONING_MODEL,
+        contents: `Generate a realistic job simulation mission.
+        Topic: ${topic}
+        Role Level: ${role}
+        
+        Context: The user is an employee at a tech company. They need a task.
+        
+        If Intern/Junior: Simple bug fix or small feature.
+        If Senior/Staff: Complex refactor, optimization, or architecture change.
+        
+        Create a buggy or incomplete boilerplate code that needs fixing/finishing.
+        
+        JSON Response:
+        {
+            title: string (e.g. "Ticket #402: Fix Memory Leak"),
+            role: "${role}",
+            companyContext: string (e.g. "We are a fintech startup..."),
+            taskDescription: string (The Jira ticket description),
+            boilerplateCode: string (The starting code),
+            objectives: string[] (List of 3 acceptance criteria),
+            hiddenTests: string[] (What the AI will check for)
+        }`,
+        config: { responseMimeType: 'application/json' }
+    });
+    return JSON.parse(response.text || '{}');
+};
+
+export const submitLabMission = async (mission: LabMission, userCode: string): Promise<LabFeedback> => {
+    const response = await ai.models.generateContent({
+        model: REASONING_MODEL,
+        contents: `Act as a Senior Staff Engineer reviewing a Pull Request.
+        
+        Mission: ${JSON.stringify(mission)}
+        User Submitted Code: "${userCode}"
+        
+        Did they meet the objectives? Did they pass the hidden tests?
+        Be strict but constructive.
+        
+        JSON Response:
+        {
+            passed: boolean,
+            score: number (0-100),
+            codeReview: string (Markdown formatted review comments),
+            optimizedCode: string (How you would have written it)
+        }`,
+        config: { responseMimeType: 'application/json' }
+    });
+    return JSON.parse(response.text || '{}');
+};
+
+>>>>>>> 2867a5c (Update wire connection visuals)
 // --- PRACTICE & SCENARIO ---
 
 export const startPracticeSession = async (topic: string): Promise<PracticeState> => {

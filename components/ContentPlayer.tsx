@@ -1,8 +1,16 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2867a5c (Update wire connection visuals)
 import React, { useState, useEffect, useRef } from 'react';
 import { generateAnalogyContent, evaluateExplanation, generateAnalogyImage } from '../services/gemini';
 import { libraryService } from '../services/libraryService';
 import { AnalogyContent, ComplexityLevel } from '../types';
+<<<<<<< HEAD
 import { BookOpen, ArrowRight, MessageSquare, HelpCircle, CheckCircle2, RefreshCw, ThumbsUp, ThumbsDown, Share2, ImageIcon, Mic, Loader2, RotateCcw, Award, Send, Lightbulb, Brain, Zap, Sliders, Network, Split, Briefcase, GraduationCap } from 'lucide-react';
+=======
+import { BookOpen, ArrowRight, MessageSquare, HelpCircle, CheckCircle2, RefreshCw, ThumbsUp, ThumbsDown, ImageIcon, Mic, Loader2, RotateCcw, Award, Send, Lightbulb, Brain, Zap, Sliders, Network, Split, Briefcase, GraduationCap } from 'lucide-react';
+>>>>>>> 2867a5c (Update wire connection visuals)
 import { motion as motionBase, AnimatePresence } from 'framer-motion';
 import LiveTutor from './LiveTutor';
 import confetti from 'canvas-confetti';
@@ -128,6 +136,7 @@ const ContentPlayer: React.FC<Props> = ({ concept, context, previousDomain, onCo
       }
   };
 
+<<<<<<< HEAD
   const handleShare = () => {
       if (content) {
           libraryService.shareToCommunity(concept, content.analogyTitle, content.analogyContent, "Guest User");
@@ -135,6 +144,8 @@ const ContentPlayer: React.FC<Props> = ({ concept, context, previousDomain, onCo
       }
   }
 
+=======
+>>>>>>> 2867a5c (Update wire connection visuals)
   const handleSubmitExplanation = async () => {
     if (!explanation.trim() || !content) return;
     setEvaluating(true);
@@ -374,4 +385,8 @@ const ContentPlayer: React.FC<Props> = ({ concept, context, previousDomain, onCo
   );
 };
 
+<<<<<<< HEAD
 export default ContentPlayer;
+=======
+export default ContentPlayer;
+>>>>>>> 2867a5c (Update wire connection visuals)

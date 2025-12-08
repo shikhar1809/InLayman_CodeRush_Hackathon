@@ -10,7 +10,10 @@ export enum AppView {
   DOCUMENT = 'DOCUMENT',
   TEST = 'TEST',
   REVIEW = 'REVIEW',
+<<<<<<< HEAD
   COMMUNITY = 'COMMUNITY',
+=======
+>>>>>>> 2867a5c (Update wire connection visuals)
   LIBRARY = 'LIBRARY',
   PROFILE = 'PROFILE',
   PRACTICE = 'PRACTICE',
@@ -181,6 +184,30 @@ export interface UserProfile {
     lastActiveDate?: number;
 }
 
+<<<<<<< HEAD
+=======
+// --- LAB TYPES ---
+
+export type LabRole = 'Intern' | 'Junior' | 'Senior' | 'Staff' | 'Architect';
+
+export interface LabMission {
+    title: string;
+    role: LabRole;
+    companyContext: string;
+    taskDescription: string;
+    boilerplateCode: string;
+    objectives: string[];
+    hiddenTests: string[];
+}
+
+export interface LabFeedback {
+    passed: boolean;
+    score: number; // 0-100
+    codeReview: string; // The "Senior Dev" comments
+    optimizedCode?: string; // How the AI would have written it
+}
+
+>>>>>>> 2867a5c (Update wire connection visuals)
 export interface CodeAnalysis {
   language: string;
   summary: string;
