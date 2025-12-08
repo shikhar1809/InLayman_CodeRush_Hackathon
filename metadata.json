@@ -1,0 +1,8 @@
+{
+  "name": "InLayman ",
+  "description": "Master complex topics in 20 minutes through adaptive, analogy-first AI tutoring. Features prerequisite mapping, personalized analogies, and interactive retention testing.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ]
+}
