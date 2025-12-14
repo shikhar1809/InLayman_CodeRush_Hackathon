@@ -1,0 +1,7 @@
+{
+  "name": "Layman Notebook (Main)",
+  "description": "A context-aware learning workspace combining a minimalist pen-and-paper aesthetic with high-powered AI logic.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
